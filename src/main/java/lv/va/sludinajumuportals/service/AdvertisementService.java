@@ -1,34 +1,34 @@
 package lv.va.sludinajumuportals.service;
 
-import lv.va.sludinajumuportals.domain.Advertisement;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lv.va.sludinajumuportals.domain.Advertisement;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class AdvertisementService {
 
-    String name = "Andris";
+    String name = "Egils";
     public List<Advertisement> hardcodedAdvertisementList;
     public List<Advertisement> reverseAdvertisementList;
 
     public AdvertisementService() {
-        hardcodedAdvertisementList = hardcodedAdvertisementInititialization();
+        hardcodedAdvertisementList = hardcodedAdvertisementInitialization();
         reverseAdvertisementList = hardcodedAdvertisementList;
         Collections.reverse(reverseAdvertisementList);
     }
 
     public Advertisement getAdvertisement() {
-        Advertisement advertisement = new Advertisement(1L, "Pardod māju", "Pārdod lielu māju", "Jānis");
+        Advertisement advertisement = new Advertisement(1L, "Title1", "Message1", "Author1");
         return advertisement;
     }
 
     public List<Advertisement> getAdvertisementListByAuthor(String author) {
         List<Advertisement> filteredByName = new ArrayList<>();
         for (Advertisement advertisement : hardcodedAdvertisementList) {
-            if(advertisement.getAuthor().matches(author)) {
+            if (advertisement.getAuthor().equals(author)) {
                 filteredByName.add(advertisement);
             }
         }
@@ -41,29 +41,26 @@ public class AdvertisementService {
 
     public ArrayList<Advertisement> getAdvertisementList() {
         ArrayList<Advertisement> advertisements = new ArrayList<>();
-        Advertisement advertisement = new Advertisement(1L, "Pardod māju", "Pārdod lielu māju", "Jānis");
-
+        Advertisement advertisement = new Advertisement(1L, "Title2", "Message2", "Author2");
 
         advertisements.add(advertisement);
-
         return advertisements;
     }
 
-    private List<Advertisement> hardcodedAdvertisementInititialization() {
-        List<Advertisement> advertisements = new ArrayList<>();
-        for(int i = 1; i< name.length(); i++){
-            Advertisement advertisement = new Advertisement(Long.valueOf(i), "House", "Selling house on Brivibas street, nr. " + i, getAuthorName(i));
+    private List<Advertisement> hardcodedAdvertisementInitialization() {
+        List<Advertisement> advertisements = new ArrayList();
+        for (int i = 1; i < name.length(); i++) {
+            Advertisement advertisement = new Advertisement(Long.valueOf(i), "Title", "Message" + i, getAuthorName(i));
             advertisements.add(advertisement);
         }
         return advertisements;
-
     }
-
 
     private String getAuthorName(int i) {
-        if(i % 2 == 0 ) {
-            return "Jānis";
+        if (i % 2 == 0) {
+            return "Emils";
         }
-        return "Pēteris";
+        return "Egils";
     }
+
 }
